@@ -1,0 +1,40 @@
+from datetime import datetime
+
+from psycopg2 import Date
+from sqlalchemy import Column, ForeignKey, String, Text, DateTime, Boolean, Integer, func, Time
+from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import ARRAY
+from app.main.models.db.base_class import Base
+
+
+class RendezVousStatus(Base):
+    pending = "pending"
+    accepted = "accepted"
+    rejected = "rejected"
+    closed = "closed"
+
+
+class Rendez_Vous(Base):
+
+    __tablename__ = "rendez_vous"
+
+    uuid = Column(String, primary_key=True,index=True)
+
+    consultant_uuid = Column(String, ForeignKey("consultants.uuid"), nullable=False,index=True)
+    consultant = relationship("Consultants", backref="rendez_vous")
+
+    patient_uuid = Column(String, ForeignKey("patients.uuid"), nullable=False,index=True)
+    patient = relationship("Patient", backref="rendez_vous")
+
+    date_rendez_vous = Column(Date, nullable=False)
+
+    start_time = Column(Time, nullable=False)
+    end_time = Column(Time, nullable=False)
+
+    status = Column(String, nullable=False,default=RendezVousStatus.pending)
+    is_active = Column(Boolean, nullable=False, index=True)
+    is_deleted = Column(Boolean, nullable=False, index=True)
+
+    created_at = Column(DateTime, nullable=False, index=True)
+    updated_at = Column(DateTime, nullable=False, index=True)
+
