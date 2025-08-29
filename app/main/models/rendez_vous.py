@@ -5,9 +5,10 @@ from sqlalchemy import Column, ForeignKey, String, Text, DateTime, Boolean, Inte
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import ARRAY
 from app.main.models.db.base_class import Base
+from enum import Enum
 
 
-class RendezVousStatus(Base):
+class RendezVousStatus(str, Enum):
     pending = "pending"
     accepted = "accepted"
     rejected = "rejected"
@@ -26,7 +27,7 @@ class Rendez_Vous(Base):
     patient_uuid = Column(String, ForeignKey("patients.uuid"), nullable=False,index=True)
     patient = relationship("Patient", backref="rendez_vous")
 
-    date_rendez_vous = Column(Date, nullable=False)
+    date_rendez_vous = Column(DateTime, nullable=False)
 
     start_time = Column(Time, nullable=False)
     end_time = Column(Time, nullable=False)
