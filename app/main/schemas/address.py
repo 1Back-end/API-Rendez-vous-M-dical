@@ -56,6 +56,5 @@ class AddressUpdate(BaseModel):
     country: Optional[str] = None
     apartment_number: Optional[str] = None
     additional_information: Optional[str] = None
-
     model_config = ConfigDict(from_attributes=True)
 
