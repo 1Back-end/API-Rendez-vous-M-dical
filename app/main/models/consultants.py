@@ -18,16 +18,16 @@ class Consultants(Base):
     email = Column(String,nullable=False,index=True)
 
     titre_uuid = Column(String,ForeignKey('titres.uuid'),nullable=False,index=True)
-    titre = relationship('Titres',backref='consultants')
+    titre = relationship('Titre',foreign_keys=[titre_uuid])
 
     service_hopital_uuid = Column(String,ForeignKey('service_hopitals.uuid'),nullable=False,index=True)
-    service_hopital = relationship('ServiceHopitals',backref='consultants')
+    service_hopital = relationship('ServiceHopitals',foreign_keys=[service_hopital_uuid])
 
     specialite_uuid = Column(String,ForeignKey('specialites.uuid'),nullable=False,index=True)
-    specialite = relationship('Specialites',backref='consultants')
+    specialite = relationship('Specialites',foreign_keys=[specialite_uuid])
 
     added_by = Column(String, ForeignKey('users.uuid', ondelete="CASCADE"), nullable=False, index=True)
-    user = relationship("User", backref="consultants")
+    user = relationship("User", foreign_keys=[added_by])
 
     is_active = Column(Boolean, nullable=False, index=True)
     is_deleted = Column(Boolean, nullable=False, index=True)
