@@ -14,10 +14,11 @@ class Sexe(Base):
     name = Column(String, nullable=False, unique=True, index=True)
 
     added_by = Column(String, ForeignKey('users.uuid', ondelete="CASCADE"), nullable=False, index=True)
-    user = relationship("User", backref="sexes")
+    user = relationship("User", foreign_keys=[added_by])
 
-    is_active = Column(Boolean, nullable=False, index=True)
-    is_deleted = Column(Boolean, nullable=False, index=True)
+    is_active = Column(Boolean, nullable=False, index=True,default=True)
+    is_deleted = Column(Boolean, nullable=False, index=True,default=False)
 
-    created_at = Column(DateTime, nullable=False, index=True)
-    updated_at = Column(DateTime, nullable=False, index=True)
+
+    created_at = Column(DateTime, default=func.now())  # Account creation timestamp
+    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())  # Last update timestamp

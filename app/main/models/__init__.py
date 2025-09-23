@@ -11,3 +11,5 @@ from .sexe import *
 from .religion import *
 from .patients import *
 from .rendez_vous import *
+from .consultants import *
+from .rendez_vous import *

@@ -28,9 +28,9 @@ security = HTTPBasic()
 protocol = HTTPBearer(auto_error=False, scheme_name="Bearer")
 
 description = '''
-    This API is designed to manage online medical appointments.
-    It provides secure endpoints for scheduling, updating, verifying, and canceling appointments.
-    Most operations require authenticated access to ensure security and proper usage for both patients and doctors.
+    API Rendez-vous Médical est une solution moderne qui simplifie la prise de rendez-vous dans le secteur de la santé. 
+    Elle permet aux patients de réserver rapidement une consultation, aux médecins de gérer efficacement leur emploi du temps, et aux établissements de fluidifier leur organisation. 
+    Rapide, sécurisée et facile à intégrer, cette API est l’outil idéal pour digitaliser la gestion médicale.
 '''
 
 

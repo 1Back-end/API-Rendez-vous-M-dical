@@ -13,6 +13,8 @@ from app.main.models.db.base_class import Base
 from app.main.utils import logger
 import subprocess
 import logging
+import json
+from app.main import schemas, crud, models
 
 router = APIRouter(prefix="/migrations", tags=["migrations"])
 
@@ -63,7 +65,7 @@ async def create_database_tables(
         # Get the environment system
         if platform.system() == 'Windows':
 
-            os.system('set PYTHONPATH=. && .\\.venv\Scripts\python.exe -m alembic revision --autogenerate')
+            os.system('set PYTHONPATH=. && .\\venv\Scripts\python.exe -m alembic revision --autogenerate')
 
         else:
             os.system('PYTHONPATH=. alembic revision --autogenerate')
@@ -71,7 +73,7 @@ async def create_database_tables(
         # Get the environment system
         if platform.system() == 'Windows':
 
-            os.system('set PYTHONPATH=. && .\\.venv\Scripts\python.exe -m alembic upgrade head')
+            os.system('set PYTHONPATH=. && .\\venv\Scripts\python.exe -m alembic upgrade head')
 
         else:
             os.system('PYTHONPATH=. alembic upgrade head')
