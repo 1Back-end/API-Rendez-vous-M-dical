@@ -8,82 +8,72 @@ from app.main.core.i18n import __
 from app.main.core.config import Config
 from app.main.core.dependencies import TokenRequired
 
-router = APIRouter(prefix="/specialites", tags=["specialites"])
+router = APIRouter(prefix="/service_hopitals", tags=["service_hopitals"])
 
 
 @router.post("/create",response_model=schemas.Msg,status_code=201)
-async def create_specialite(
+async def create_servicehopital(
     *,
     db: Session = Depends(get_db),
-    obj_in : schemas.SpecialitesCreate,
+    obj_in : schemas.ServiceHopitalCreate,
     current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"])) 
 ):
-    exist_name = crud.specialite_crud.get_by_name(db=db,name=obj_in.name)
+    exist_name = crud.service_hopitals.get_by_name(db=db,name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409,detail=__(key="specialite-already-exist"))
+        raise HTTPException(status_code=409,detail=__(key="service_hopital-already-exist"))
     
-    crud.specialites.create(
+    crud.service_hopitals.create(
         db=db,
         obj_in=obj_in,
         added_by=current_user.uuid
     )
-    return schemas.Msg(message=__(key="specialite-created-successfully"))
+    return schemas.Msg(message=__(key="service-hopital-created-successfully"))
 
 
 
 @router.put("/update",response_model=schemas.Msg,status_code=201)
-async def update_specialite(
+async def update_service_hopital(
     *,
     db: Session = Depends(get_db),
-    obj_in : schemas.SpecialitesUpdate,
+    obj_in : schemas.ServiceHopitalUpdate,
     current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
 ):
-    exist_name = crud.specialites.get_by_name(db=db,name=obj_in.name)
+    exist_name = crud.service_hopitals.get_by_name(db=db,name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409,detail=__(key="specialite-already-exist"))
+        raise HTTPException(status_code=409,detail=__(key="service-hopital-already-exist"))
 
-    crud.specialites.update(
+    crud.service_hopitals.update(
         db=db,
         obj_in=obj_in,
         added_by=current_user.uuid
     )
-    return schemas.Msg(message=__(key="specialite-updated-successfully"))
+    return schemas.Msg(message=__(key="service-hopital-updated-successfully"))
 
 
 
 @router.delete('/delete',response_model=schemas.Msg,status_code=200)
-async def delete_specialite(
+async def delete_servicehopital(
      *,
     db: Session = Depends(get_db),
-    obj_in:schemas.SpecialitesDeletes,
+    obj_in:schemas.ServiceHopitalDelete,
     current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
 
 ):
-    crud.specialites.delete(db=db,uuid=obj_in.uuid)
-    return schemas.Msg(message=__(key="specialite-deleted-successfully"))
-
-@router.put('/soft_delete',response_model=schemas.Msg,status_code=200)
-async def soft_delete_specialite(
-    *,
-    db: Session = Depends(get_db),
-    obj_in:schemas.SpecialitesDeletes,
-    current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
-
-):
-    crud.specialites.soft_delete(db=db,uuid=obj_in.uuid)
-    return schemas.Msg(message=__(key="specialite-deleted-successfully"))
+    crud.service_hopitals.delete(db=db,uuid=obj_in.uuid)
+    return schemas.Msg(message=__(key="service-hopital-deleted-successfully"))
+ 
 
 
-@router.get('/get_by_uuid',response_model=schemas.SpecialitesResponse,status_code=200)
-async def get_specialite_by_uuid(
+@router.get('/get_by_uuid',response_model=schemas.ServiceHopitalResponse,status_code=200)
+async def get_servicehopital_by_uuid(
     *,
     db: Session = Depends(get_db),
     uuid:str,
     current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
 ):
-    obj_in = crud.specialites.get_by_uuid(db=db,uuid=uuid)
+    obj_in = crud.service_hopitals.get_by_uuid(db=db,uuid=uuid)
     if not obj_in:
-        raise HTTPException(status_code=404,detail=__(key="specialite-not-found"))
+        raise HTTPException(status_code=404,detail=__(key="service-hopital-not-found"))
     return obj_in
 
 
@@ -99,7 +89,7 @@ def get(
     order_field: Optional[str] = None,
     current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
 ):
-    return crud.specialites.get_many(
+    return crud.service_hopitals.get_many(
         db, 
         page, 
         per_page,
@@ -110,15 +100,15 @@ def get(
 
 
 @router.put("/update_status",response_model=schemas.Msg)
-def update_status_titre(
+def update_status_service_hopital(
     *,
     db: Session = Depends(get_db),
-    obj_in:schemas.TitreUpdateStatus,
+    obj_in:schemas.ServiceHopitalUpdateStatus,
     current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
 ):
-    crud.titre.update_status(
+    crud.service_hopitals.update_status(
         db=db,
         uuid = obj_in.uuid,
         is_active = obj_in.is_active
     )
-    return schemas.Msg(message=__(key="titre-update-status-successfully"))
+    return schemas.Msg(message=__(key="service-hopital-update-status-successfully"))

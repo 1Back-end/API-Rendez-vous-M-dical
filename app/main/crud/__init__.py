@@ -9,7 +9,7 @@ from .titres_crud import *
 from .religion_crud import *
 from .hopitals_crud import *
 from .specialite_crud import *
-
+from .service_hopitals_crud import *
 
 
 

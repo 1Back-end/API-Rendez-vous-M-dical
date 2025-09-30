@@ -9,7 +9,6 @@ from enum import Enum
 
 
 class RendezVousStatus(str,Enum):
-class RendezVousStatus(str, Enum):
     pending = "pending"
     accepted = "accepted"
     rejected = "rejected"
