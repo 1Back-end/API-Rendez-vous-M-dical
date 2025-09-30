@@ -17,7 +17,7 @@ class ConfigClass(BaseSettings):
     SECRET_KEY: str = get_secret("SECRET_KEY", 'H5zMm7XtCKNsab88JQCLkaY4d8hExSjghGyaJDy12M')
     ALGORITHM: str = get_secret("ALGORITHM", 'HS256')
 
-    ADMIN_KEY: str = get_secret("ADMIN_KEY", "key2025")
+    ADMIN_KEY: str = get_secret("ADMIN_KEY", "Key2025")
     ADMIN_USERNAME: str = get_secret("ADMIN_USERNAME", "admin_tools")
     ADMIN_PASSWORD: str = get_secret("ADMIN_PASSWORD", "XfT89KzLpQ")
 
@@ -29,7 +29,7 @@ class ConfigClass(BaseSettings):
     EMAIL_RESET_TOKEN_EXPIRE_HOURS: int = get_secret("EMAIL_RESET_TOKEN_EXPIRE_HOURS", 8)
 
     # SQLALCHEMY_DATABASE_URL: str = get_secret("SQLALCHEMY_DATABASE_URL", 'postgresql://base_api_v2:Lcy96xP66EMBbrrr@dbe.comii.de:6020/sanctions_db_dev')
-    SQLALCHEMY_DATABASE_URL: str = get_secret("SQLALCHEMY_DATABASE_URL", 'postgresql://postgres:2002@localhost:5432/rendez_vous_hospital_db')
+    SQLALCHEMY_DATABASE_URL: str = get_secret("SQLALCHEMY_DATABASE_URL", 'postgresql://postgres:2002@localhost:5432/api_rendez_vous_db')
 
     SQLALCHEMY_POOL_SIZE: int = 100
     SQLALCHEMY_MAX_OVERFLOW: int = 0
@@ -40,25 +40,29 @@ class ConfigClass(BaseSettings):
         "pool_recycle": SQLALCHEMY_POOL_RECYCLE,
     }
 
-    CLOUDINARY_CLOUD_NAME:str = get_secret("CLOUDINARY_NAME","do8fpzhen")
-    CLOUDINARY_API_KEY:str = get_secret("CLOUDINARY_API_KEY","839879112629286")
-    CLOUDINARY_API_SECRET:str = get_secret("CLOUDINARY_API_SECRET","jSQC_LoynIqEqDd81fJY1gTATVI")
+    CLOUDINARY_CLOUD_NAME:str = get_secret("CLOUDINARY_NAME","dg08bmef7")
+    CLOUDINARY_API_KEY:str = get_secret("CLOUDINARY_API_KEY","365121658762574")
+    CLOUDINARY_API_SECRET:str = get_secret("CLOUDINARY_API_SECRET","u9bSMKdPAm0tf1M1KBt1E61IWrs")
     CLOUDINARY_API_SECURE:bool = get_secret("CLOUDINARY_API_SECURE", True)
     IMAGE_MEDIUM_WIDTH: int = get_secret("IMAGE_MEDIUM_WIDTH", 600)
     IMAGE_THUMBNAIL_WIDTH: int = get_secret("IMAGE_THUMBNAIL_WIDTH", 300)
     UPLOADED_FILE_DEST: str = get_secret("UPLOADED_FILE_DEST", "uploads")
 
 
-    MAILTRAP_USERNAME :str = get_secret("MAILTRAP_USERNAME", "987982cf606b48")
-    MAILTRAP_PASSWORD :str = get_secret("MAILTRAP_PASSWORD", "c08cbffad8f6c7")
+    MAILTRAP_USERNAME :str = get_secret("MAILTRAP_USERNAME", "f45722a3131c5b")
+    MAILTRAP_PASSWORD :str = get_secret("MAILTRAP_PASSWORD", "f0cf08c3174d66")
     MAILTRAP_HOST: ClassVar[str] = "smtp.mailtrap.io"
     MAILTRAP_PORT: ClassVar[int] = 587
-    EMAILS_FROM_CLOUDINARY: str = get_secret("EMAILS_FROM_CLOUDINARY", "laurentalphonsewilfried@gmail.com")
+    EMAILS_FROM_CLOUDINARY: str = get_secret("EMAILS_FROM_CLOUDINARY", "oscaressonne@gmail.com")
 
     PREFERRED_LANGUAGE: str = get_secret("PREFERRED_LANGUAGE", 'fr')
     API_V1_STR: str = get_secret("API_V1_STR", "/api/v1")
     
-    PROJECT_NAME: str = get_secret("PROJECT_NAME", "API GENERATE LICENCE")
+<<<<<<< HEAD
+    PROJECT_NAME: str = get_secret("PROJECT_NAME", "API BLOG")
+=======
+    PROJECT_NAME: str = get_secret("PROJECT_NAME", "RENDEZ VOUS MEDICAL")
+>>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
     PROJECT_VERSION: str = get_secret("PROJECT_VERSION", "0.0.1")
 
     # Redis config
@@ -72,10 +76,10 @@ class ConfigClass(BaseSettings):
     SMTP_SSL: bool = get_secret("SMTP_SSL", False)
     SMTP_PORT: Optional[int] = int(get_secret("SMTP_PORT", 587))
     SMTP_HOST: Optional[str] = get_secret("SMTP_HOST", "smtp.gmail.com")
-    SMTP_USER: Optional[str] = get_secret("SMTP_USER", "laurentalphonsewilfried@gmail.com")
-    SMTP_PASSWORD: Optional[str] = get_secret("SMTP_PASSWORD", "viuessfzwqnwneil")
-    EMAILS_FROM_EMAIL: Optional[EmailStr] = get_secret("EMAILS_FROM_EMAIL", "laurentalphonsewilfried@gmail.com")
-    EMAILS_FROM_NAME: Optional[str] = get_secret("EMAILS_FROM_NAME", "Laurent Alphonse")
+    SMTP_USER: Optional[str] = get_secret("SMTP_USER", "API BLOG")
+    SMTP_PASSWORD: Optional[str] = get_secret("SMTP_PASSWORD", "tuxfsbtpvkiunhfz")
+    EMAILS_FROM_EMAIL: Optional[EmailStr] = get_secret("EMAILS_FROM_EMAIL", "oscaressonne@gmail.com")
+    EMAILS_FROM_NAME: Optional[str] = get_secret("EMAILS_FROM_NAME", "API BLOG")
 
     @validator("EMAILS_FROM_NAME")
     def get_project_name(cls, v: Optional[str], values: Dict[str, Any]) -> str:

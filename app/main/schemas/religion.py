@@ -4,85 +4,89 @@ from datetime import datetime
 
 from app.main.schemas.user import AddedBySlim
 
+
+class Religion(BaseModel):
+    name:str
 <<<<<<< HEAD
 
-class Titre(BaseModel):
-    name:str
 
-
-class TitreCreate(Titre):
+class ReligionCreate(Religion):
     pass 
 
 
-class TitreUpdate(BaseModel):
+class ReligionUpdate(BaseModel):
     uuid: str
     name: Optional[str]
     
 
-class TitreDelete(BaseModel):
+class ReligionDelete(BaseModel):
     uuid: str
 
-class TitreUpdateStatus(BaseModel):
+class ReligionUpdateStatus(BaseModel):
     uuid: Optional[str]
     is_active: bool
 
 
-class TitreResponse(BaseModel):
+
+class ReligionResponse(BaseModel):
     uuid : str
     name: str
-    is_active:bool
     user : AddedBySlim 
     created_at:datetime
     updated_at: Optional[datetime]
     model_config = ConfigDict(from_attributes=True)
 
-
-class TitreResponseList(BaseModel):
+class ReligionResponseList(BaseModel):
     total: int
     pages: int
     per_page: int
     current_page: int
-    data: list[TitreResponse]
+    data: list[ReligionResponse]
     model_config = ConfigDict(from_attributes=True)
 
 
-
-class TitreSlim(BaseModel):
+class ReligionSlim(BaseModel):
     uuid:str
     name:str
     model_config = ConfigDict(from_attributes=True)
- 
 =======
-class Titre(BaseModel):
- name:str
- 
-class TitreCreate(Titre):
-     pass
- 
-class TitreUpdate(BaseModel):
+    
+class ReligionCreate(Religion):
+    pass
+
+class ReligionUpdate(BaseModel):
     uuid:str
     name:Optional[str]
     
-class TitreDelete(BaseModel):
+    
+class ReligionDelete(BaseModel):
     uuid:str
     
-
-class TitreUpdateStatus(BaseModel):
+    
+    
+    
+class ReligionUpdateStatus(BaseModel):
     uuid:str
     is_active:bool
+    
+    
 
-class TitreResponse(BaseModel):
+    
+class ReligionResponse(BaseModel):
     uuid:str
     name:str
-    is_active:bool
     user:AddedBySlim
+    is_active:bool
+    created_at: datetime
+    updated_at: Optional[datetime]
     model_config = ConfigDict(from_attributes=True)
     
-class TitreResponseList(BaseModel):
+class ReligionResponseList(BaseModel):
    total :int
    per_page: int
    pages:int
    current_page:int
-   data:list[TitreResponse]
+   data:list[ReligionResponse]
    model_config = ConfigDict(from_attributes=True)
+    
 >>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a

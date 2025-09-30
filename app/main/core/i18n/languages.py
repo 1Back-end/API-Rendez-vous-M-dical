@@ -1,8 +1,10 @@
 from .fr import translation as fr
 from .en import translation as en
-from .de import translation as de
+<<<<<<< HEAD
+=======
+
+>>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
 langs = {
     "en": en,
     "fr": fr,
-    "de":de,
 }
