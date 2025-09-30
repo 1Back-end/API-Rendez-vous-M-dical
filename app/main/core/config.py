@@ -58,7 +58,11 @@ class ConfigClass(BaseSettings):
     PREFERRED_LANGUAGE: str = get_secret("PREFERRED_LANGUAGE", 'fr')
     API_V1_STR: str = get_secret("API_V1_STR", "/api/v1")
     
+<<<<<<< HEAD
     PROJECT_NAME: str = get_secret("PROJECT_NAME", "API BLOG")
+=======
+    PROJECT_NAME: str = get_secret("PROJECT_NAME", "RENDEZ VOUS MEDICAL")
+>>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
     PROJECT_VERSION: str = get_secret("PROJECT_VERSION", "0.0.1")
 
     # Redis config

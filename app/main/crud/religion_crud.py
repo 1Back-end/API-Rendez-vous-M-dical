@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from app.main.crud.base import CRUDBase
 from app.main import models,schemas
 
+<<<<<<< HEAD
 class CRUDReligion(CRUDBase[models.Religion,schemas.ReligionCreate,schemas.ReligionUpdate]):
 
     @classmethod
@@ -53,12 +54,51 @@ class CRUDReligion(CRUDBase[models.Religion,schemas.ReligionCreate,schemas.Relig
             uuid = str(uuid.uuid4()),
             name = obj_in.name,
             added_by = added_by
+=======
+
+class CRUDReligion(CRUDBase[models.Religion, schemas.ReligionCreate, schemas.ReligionUpdate]): # type: ignore
+
+    @classmethod
+    def get_by_uuid(cls, db: Session, uuid: str):
+        return db.query(models.Religion).filter(models.Religion.uuid == uuid,models.Religion.is_deleted==False).first()
+
+    @classmethod
+    def get_by_name(cls, db: Session, name: str):
+        return db.query(models.Religion).filter(models.Religion.name == name,models.Religion.is_deleted==False).first()
+
+    @classmethod
+    def delete(cls, db: Session, uuid: str):
+
+        db_obj = cls.get_by_uuid(db=db, uuid=uuid)
+        if not db_obj:
+            raise HTTPException(
+                status_code=404, detail="religion-not-found")
+        db.delete(db_obj)
+        db.commit()
+
+    @classmethod
+    def soft_delete(cls, db: Session, uuid: str):
+        db_obj = cls.get_by_uuid(db=db, uuid=uuid)
+        if not db_obj:
+            raise HTTPException(
+                status_code=404, detail="religion-not-found")
+        db_obj.is_deleted = True
+        db.commit()
+
+    @classmethod
+    def create(cls, db: Session, obj_in: schemas.ReligionCreate,added_by:str):
+        db_obj = models.Religion(
+            uuid=str(uuid.uuid4()),
+            name=obj_in.name,
+            added_by=added_by
+>>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
         )
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
         return db_obj
     
+<<<<<<< HEAD
 
     @classmethod
     def update(cls,db:Session,obj_in:schemas.ReligionUpdate,added_by:str):
@@ -72,6 +112,8 @@ class CRUDReligion(CRUDBase[models.Religion,schemas.ReligionCreate,schemas.Relig
         return db_obj
     
 
+=======
+>>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
     @classmethod
     def get_many(
         cls,
@@ -82,6 +124,7 @@ class CRUDReligion(CRUDBase[models.Religion,schemas.ReligionCreate,schemas.Relig
         order_field: Optional[str] = None,
         keyword: Optional[str]=None,
     ):
+<<<<<<< HEAD
         
         record_query = db.query(models.Religion).filter(models.Religion.is_deleted == False)
 
@@ -89,6 +132,14 @@ class CRUDReligion(CRUDBase[models.Religion,schemas.ReligionCreate,schemas.Relig
             record_query = record_query.filter(
                 or_(
                     models.Religion.name.ilike(f'%{keyword}%')
+=======
+        record_query = db.query(models.Religion).filter( models.Religion.is_deleted == False)
+        
+        if keyword:
+            record_query = record_query.filter(
+                or_(
+                    models.Religion.name.ilike(f'%{keyword}%'),
+>>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
                 )
             )
 
@@ -98,6 +149,7 @@ class CRUDReligion(CRUDBase[models.Religion,schemas.ReligionCreate,schemas.Relig
             else:
                 record_query = record_query.order_by(getattr(models.Religion, order_field).desc())
 
+<<<<<<< HEAD
         total= record_query.count()
 
         record_query = record_query. offset((page - 1 ) * per_page). limit(per_page)
@@ -113,3 +165,33 @@ class CRUDReligion(CRUDBase[models.Religion,schemas.ReligionCreate,schemas.Relig
 
 
 religion = CRUDReligion(models.Religion) 
+=======
+        total = record_query.count() 
+        # Pagination avec offset et limit
+        record_query = record_query.offset((page - 1) * per_page).limit(per_page)
+
+        # Retourne une réponse paginée avec total, pages, page actuelle, nombre par page et liste des données
+        return schemas.ReligionResponseList(
+            total=total,
+            pages=math.ceil(total / per_page),
+            per_page=per_page,
+            current_page=page,
+            data=record_query,
+        )
+    
+
+    @classmethod
+    def update(cls, db: Session, obj_in: schemas.ReligionUpdate,added_by:str):
+        db_obj = cls.get_by_uuid(db=db, uuid=obj_in.uuid)
+        if not db_obj:
+            raise HTTPException(
+                status_code=404, detail="religion-not-found")
+        db_obj.name = obj_in.name if obj_in.name else db_obj.name
+        obj_in.added_by = added_by
+        db.commit()
+        db.refresh(db_obj)
+        return db_obj
+
+
+unit_product = CRUDReligion(models.Religion)
+>>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
