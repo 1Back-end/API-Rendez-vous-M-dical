@@ -3,6 +3,7 @@ from pydantic import BaseModel, ConfigDict
 from datetime import datetime, time
 
 
+class RendezVousBase(BaseModel):
 
 class Rendez_Vous(BaseModel):
     consultant_uuid:str

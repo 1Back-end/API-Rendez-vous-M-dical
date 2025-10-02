@@ -1,6 +1,11 @@
 from datetime import timedelta, datetime
+<<<<<<< HEAD
+from typing import Any
+from fastapi import APIRouter, Depends, Body, HTTPException
+=======
 from typing import Any, Optional
 from fastapi import APIRouter, Depends, Body, HTTPException, Query
+>>>>>>> 3ea90b8c53f13b8391ee1d89cfde4eaf50aeef82
 from sqlalchemy.orm import Session
 from app.main.core.dependencies import get_db, TokenRequired
 from app.main import schemas, crud, models
@@ -11,6 +16,15 @@ from app.main.core.dependencies import TokenRequired
 router = APIRouter(prefix="/sexe", tags=["sexe"])
 
 
+<<<<<<< HEAD
+@router.post("/create",response_model=schemas.Msg)
+async def create_sexe(
+        *,
+        db: Session = Depends(get_db),
+        obj_in : schemas.SexeCreate,
+        current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
+):
+=======
 @router.post("/create",response_model=schemas.Msg,status_code=201)
 async def create_sexe(
     *,
@@ -22,6 +36,7 @@ async def create_sexe(
     if exist_sexe:
         raise HTTPException(status_code=409,detail=__(key="sexe-already-exist"))
     
+>>>>>>> 3ea90b8c53f13b8391ee1d89cfde4eaf50aeef82
     crud.sexe.create(
         db=db,
         obj_in=obj_in,
@@ -29,6 +44,15 @@ async def create_sexe(
     )
     return schemas.Msg(message=__(key="sexe-created-successfully"))
 
+<<<<<<< HEAD
+@router.put("/update",response_model=schemas.Msg)
+async def update_sexe(
+        *,
+        db: Session = Depends(get_db),
+        obj_in : schemas.SexeUpdate,
+        current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
+):
+=======
 
 
 @router.put("/update",response_model=schemas.Msg,status_code=201)
@@ -42,11 +66,57 @@ async def update_sexe(
     if exist_sexe:
         raise HTTPException(status_code=409,detail=__(key="sexe-already-exist"))
     
+>>>>>>> 3ea90b8c53f13b8391ee1d89cfde4eaf50aeef82
     crud.sexe.update(
         db=db,
         obj_in=obj_in,
         added_by=current_user.uuid
     )
+<<<<<<< HEAD
+    return schemas.Msg(message=__(key="sexe-update-successfully"))
+
+@router.delete("/delete",response_model=schemas.Msg)
+async def delete_sexe(
+        *,
+        db: Session = Depends(get_db),
+        obj_in : schemas.SexeDelete,
+        current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
+):
+    crud.sexe.delete(
+        db=db,
+        uuid=obj_in.uuid
+    )
+    return schemas.Msg(message=__(key="sexe-delete-successfully"))
+
+
+@router.put("/soft-delete",response_model=schemas.Msg)
+async def soft_delete_sexe(
+        *,
+        db: Session = Depends(get_db),
+        obj_in: schemas.SexeDelete,
+        current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
+):
+    crud.sexe.soft_delete(
+        db=db,
+        uuid=obj_in.uuid
+    )
+    return schemas.Msg(message=__(key="sexe-delete-successfully"))
+
+
+@router.put("/update-status",response_model=schemas.Msg)
+async def update_sexe_status(
+        *,
+        db: Session = Depends(get_db),
+        obj_in : schemas.UpdateStatus,
+        current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
+):
+    crud.sexe.update_status(
+        db=db,
+        uuid=obj_in.uuid,
+        is_active=obj_in.is_active
+    )
+    return schemas.Msg(message=__(key="sexe-update-successfully"))
+=======
     return schemas.Msg(message=__(key="sexe-updated-successfully"))
 
 
@@ -86,10 +156,24 @@ async def get_sexe_by_uuid(
     if not obj_in:
         raise HTTPException(status_code=404,detail=__(key="user-not-found"))
     return obj_in
+>>>>>>> 3ea90b8c53f13b8391ee1d89cfde4eaf50aeef82
 
 
 @router.get("/get_many", response_model=None)
 def get(
+<<<<<<< HEAD
+        *,
+        db: Session = Depends(get_db),
+        page: int = 1,
+        per_page: int = 25,
+        current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
+):
+    return crud.sexe.get_many(
+        db,
+        page,
+        per_page,
+    )
+=======
     *,
     db: Session = Depends(get_db),
     page: int = 1,
@@ -122,3 +206,4 @@ def update_status_sexe(
         is_active = obj_in.is_active
     )
     return schemas.Msg(message=__(key="sexe-update-status-successfully"))
+>>>>>>> 3ea90b8c53f13b8391ee1d89cfde4eaf50aeef82
