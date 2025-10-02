@@ -4,8 +4,6 @@ from .msg import Msg, BoolStatus, DataDisplay
 from .base import DataList
 from .user import *
 from .file import *
-<<<<<<< HEAD
-from .adress import * 
 from .adress import *
 from .sexe import *
 from .titres import *
@@ -15,6 +13,8 @@ from .specialites import *
 from .service_hopitals import *
 from .consultants import *
 from .patients import *
+from .rendez_vous import *
+
 
 
 

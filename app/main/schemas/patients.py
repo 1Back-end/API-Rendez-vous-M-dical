@@ -25,6 +25,7 @@ class PatientCreate(Patient):
 
 
 class PatientUpdate(BaseModel):
+    uuid:str
     first_name:Optional[str]
     last_name:Optional[str]
     phone_number:Optional[str]

@@ -10,7 +10,7 @@ from app.main.models.db.base_class import Base
 
 class Patient(Base):
 
-    __tablename__ = 'patients'
+    __tablename__ = 'patient'
 
 
     uuid = Column(String, primary_key=True, index=True)
