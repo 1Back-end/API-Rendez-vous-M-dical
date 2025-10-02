@@ -5,7 +5,6 @@ from fastapi import APIRouter, Depends, Body, HTTPException, Query, File
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 from starlette.requests import Request
-from app.main.core.mail import send_reset_password_option2_email
 from app.main.core.dependencies import get_db, TokenRequired
 from app.main import schemas, crud, models
 from app.main.core.i18n import __
@@ -121,7 +120,7 @@ def start_reset_password(
     db.commit()
     db.refresh(user)
     full_name = f"{user.first_name} {user.last_name}"
-    send_reset_password_option2_email(email_to=obj_in.email,otp=code,name=full_name)
+    # send_reset_password_option2_email(email_to=obj_in.email,otp=code,name=full_name)
     
 
     return schemas.Msg(message=__(key="reset-password-started"))

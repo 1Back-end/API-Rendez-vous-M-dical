@@ -154,7 +154,7 @@ class CRUDrendez_vous(CRUDBase[models.Rendez_Vous, schemas.Rendez_VousCreate, sc
 
         total = record_query.count()
         record_query = record_query.offset((page - 1) * per_page).limit(per_page)
-        return schemas.Rendez_VousResponseList(
+        return schemas.Rendez_VousResponseListSlim1(
             total=total,
             pages=math.ceil(total / per_page),
             per_page=per_page,

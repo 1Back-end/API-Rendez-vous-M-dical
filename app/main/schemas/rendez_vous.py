@@ -58,11 +58,40 @@ class Rendez_VousResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+
+class Rendez_VousResponseSlim1(BaseModel):
+    uuid: str
+    patient:PatientSlim
+    date_rendez_vous:datetime
+    start_time:time
+    end_time:time
+    status:str
+    is_active: bool
+    is_deleted: bool
+    created_at: datetime
+    updated_at: Optional[datetime]
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+
 class Rendez_VousResponseList(BaseModel):
     total: int
     pages: int
     per_page: int
     current_page: int
     data: list[Rendez_VousResponse]
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+
+
+class Rendez_VousResponseListSlim1(BaseModel):
+    total: int
+    pages: int
+    per_page: int
+    current_page: int
+    data: list[Rendez_VousResponseSlim1]
 
     model_config = ConfigDict(from_attributes=True)
