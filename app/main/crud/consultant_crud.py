@@ -139,8 +139,7 @@ class CRUDConsultant(CRUDBase[models.Consultants,schemas.ConsultantCreate,schema
         )
 
 
-        
-
+consulant =CRUDConsultant(models.Consultants)
     
 
         

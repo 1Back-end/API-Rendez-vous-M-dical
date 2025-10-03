@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.main.crud.base import CRUDBase
 from app.main import models,schemas
 
-<<<<<<< HEAD
+
 class CRUDTitre(CRUDBase[models.Titre,schemas.TitreCreate,schemas.TitreUpdate]):
 
     @classmethod
@@ -50,13 +50,12 @@ class CRUDTitre(CRUDBase[models.Titre,schemas.TitreCreate,schemas.TitreUpdate]):
     
     @classmethod
     def create(cls,db:Session, obj_in:schemas.TitreCreate,added_by:str):
-        db_obj = models.Titre(
-            uuid = str(uuid.uuid4()),
-            name = obj_in.name,
-            added_by = added_by
-=======
+        db_obj = models.Titre
+        uuid = str(uuid.uuid4()),
+        name = obj_in.name,
+        added_by = added_by
 
-class CRUDTitre(CRUDBase[models.Titre, schemas.TitreCreate, schemas.TitreUpdate]): # type: ignore
+class CRUDTitre(CRUDBase[models.Titre, schemas.TitreCreate, schemas.TitreUpdate]): 
 
     @classmethod
     def get_by_uuid(cls, db: Session, uuid: str):
@@ -91,13 +90,11 @@ class CRUDTitre(CRUDBase[models.Titre, schemas.TitreCreate, schemas.TitreUpdate]
             uuid=str(uuid.uuid4()),
             name=obj_in.name,
             added_by=added_by
->>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
         )
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
         return db_obj
-<<<<<<< HEAD
     
 
     @classmethod
@@ -105,7 +102,6 @@ class CRUDTitre(CRUDBase[models.Titre, schemas.TitreCreate, schemas.TitreUpdate]
         db_obj = cls.get_by_uuid(db=db,uuid=obj_in.uuid) 
         if not db_obj:
             raise HTTPException(status_code=404,detail="Titre-not-found")
-=======
 
     @classmethod
     def update(cls, db: Session, obj_in: schemas.TitreUpdate,added_by:str):
@@ -113,18 +109,13 @@ class CRUDTitre(CRUDBase[models.Titre, schemas.TitreCreate, schemas.TitreUpdate]
         if not db_obj:
             raise HTTPException(
                 status_code=404, detail="titre-not-Found")
->>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
         db_obj.name = obj_in.name if obj_in.name else db_obj.name
         db_obj.added_by = added_by
         db.commit()
         db.refresh(db_obj)
         return db_obj
-    
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
+
     @classmethod
     def get_many(
         cls,
@@ -135,23 +126,15 @@ class CRUDTitre(CRUDBase[models.Titre, schemas.TitreCreate, schemas.TitreUpdate]
         order_field: Optional[str] = None,
         keyword: Optional[str]=None,
     ):
-<<<<<<< HEAD
         
-        record_query = db.query(models.Titre).filter(models.Titre.is_deleted == False)
 
-        if keyword:
-            record_query = record_query.filter(
-                or_(
-                    models.Titre.name.ilike(f'%{keyword}%')
-=======
         record_query = db.query(models.Titre).filter( models.Titre.is_deleted == False)
         
         if keyword:
             record_query = record_query.filter(
                 or_(
                     models.Titre.name.ilike(f'%{keyword}%'),
->>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
-                )
+
             )
 
         if order and order_field and hasattr(models.Titre, order_field):
@@ -160,7 +143,6 @@ class CRUDTitre(CRUDBase[models.Titre, schemas.TitreCreate, schemas.TitreUpdate]
             else:
                 record_query = record_query.order_by(getattr(models.Titre, order_field).desc())
 
-<<<<<<< HEAD
         total= record_query.count()
 
         record_query = record_query. offset((page - 1 ) * per_page). limit(per_page)
@@ -177,7 +159,7 @@ class CRUDTitre(CRUDBase[models.Titre, schemas.TitreCreate, schemas.TitreUpdate]
 
 
 titre = CRUDTitre(models.Titre) 
-=======
+
         total = record_query.count() 
         # Pagination avec offset et limit
         record_query = record_query.offset((page - 1) * per_page).limit(per_page)
@@ -203,4 +185,3 @@ titre = CRUDTitre(models.Titre)
         
         
 titre = CRUDTitre(models.Titre)
->>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a

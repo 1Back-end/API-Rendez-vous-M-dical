@@ -18,10 +18,32 @@ async def create_patient(
     obj_in : schemas.PatientCreate,
     current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
 ):
-    exist_patient = crud.patient.get_by_name(db=db,name=obj_in.name)
-    if exist_patient:
-        raise HTTPException(status_code=409,detail=__(key="patient-already-exist"))
+    exist_patient_email = crud.patient.get_by_email(db=db,email=obj_in.email)
+    if exist_patient_email:
+        raise HTTPException(status_code=409,detail=__(key="email-patient-already-exist"))
     
+    exist_patient_phone_number = crud.patient.get_by_phone_number(db=db,phone_number=obj_in.phone_number)
+    if exist_patient_phone_number:
+         raise HTTPException(status_code=409,detail=__(key="phone-number-patient-already-exist"))
+    
+    if obj_in.phone_number_2:
+        exist_patient_phone_number_2 = crud.patient.get_by_phone_number2(db=db,phone_number_2=obj_in.phone_number_2)
+        if exist_patient_phone_number_2:
+            raise HTTPException(status_code=409,detail=__(key="phone-number-2-patient-already-exist"))
+        
+    address = crud.address.get_by_uuid(db=db,uuid=obj_in.address_uuid)
+    if not address:
+        raise HTTPException(status_code=404,detail=__(key="address-not-found"))
+    
+    sexe = crud.sexe.get_by_uuid(db=db,uuid=obj_in.sexe_uuid)
+    if not sexe:
+        raise HTTPException(status_code=404,detail=__(key="sexe-not-found"))
+    
+    religion = crud.religion.get_by_uuid(db=db,uuid=obj_in.religion_uuid)
+    if not religion:
+        raise HTTPException(status_code=404,detail=__(key="religion-not-found"))
+
+        
     crud.patient.create(
         db=db,
         obj_in=obj_in,
@@ -38,10 +60,31 @@ async def update_patient(
     obj_in : schemas.PatientUpdate,
     current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN"]))
 ):
-    exist_patient = crud.patient.get_by_name(db=db,name=obj_in.name)
-    if exist_patient:
-        raise HTTPException(status_code=409,detail=__(key="patient-already-exist"))
+    exist_patient_email = crud.patient.get_by_email(db=db,email=obj_in.email)
+    if exist_patient_email:
+        raise HTTPException(status_code=409,detail=__(key="email-patient-already-exist"))
     
+    exist_patient_phone_number = crud.patient.get_by_phone_number(db=db,phone_number=obj_in.phone_number)
+    if exist_patient_phone_number:
+        raise HTTPException(status_code=409,detail=__(key="phone-number-patient-already-exist"))
+    
+    if obj_in.phone_number_2:
+        exist_patient_phone_number_2 = crud.patient.get_by_phone_number2(db=db,phone_number_2=obj_in.phone_number_2)
+        if exist_patient_phone_number_2:
+            raise HTTPException(status_code=409,detail=__(key="phone-number-2-patient-already-exist"))
+        
+    address = crud.address.get_by_uuid(db=db,uuid=obj_in.address_uuid)
+    if not address:
+        raise HTTPException(status_code=404,detail=__(key="address-not-found"))
+    
+    sexe = crud.sexe.get_by_uuid(db=db,uuid=obj_in.sexe_uuid)
+    if not sexe:
+        raise HTTPException(status_code=404,detail=__(key="sexe-not-found"))
+    
+    religion = crud.religion.get_by_uuid(db=db,uuid=obj_in.religion_uuid)
+    if not religion:
+        raise HTTPException(status_code=404,detail=__(key="religion-not-found"))
+        
     crud.patient.update(
         db=db,
         obj_in=obj_in,

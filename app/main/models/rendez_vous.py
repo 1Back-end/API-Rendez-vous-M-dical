@@ -7,10 +7,6 @@ from sqlalchemy.dialects.postgresql import ARRAY
 from app.main.models.db.base_class import Base
 from enum import Enum
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3ea90b8c53f13b8391ee1d89cfde4eaf50aeef82
 class RendezVousStatus(str,Enum):
     pending = "pending"
     accepted = "accepted"

@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 
-from app.main.schemas.adress import AddressSlim
+from app.main.schemas.address import AddressSlim
 from app.main.schemas.religion import ReligionSlim
 from app.main.schemas.sexe import SexeSlim
 from app.main.schemas.user import AddedBySlim

@@ -1,9 +1,8 @@
 from typing import Optional
 from pydantic import BaseModel, ConfigDict
 from datetime import datetime, time
+from app.main.schemas.user import AddedBySlim
 
-
-class RendezVousBase(BaseModel):
 
 class Rendez_Vous(BaseModel):
     consultant_uuid:str

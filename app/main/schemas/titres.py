@@ -52,7 +52,6 @@ class TitreSlim(BaseModel):
     name:str
     model_config = ConfigDict(from_attributes=True)
  
-=======
 class Titre(BaseModel):
  name:str
  
@@ -85,4 +84,4 @@ class TitreResponseList(BaseModel):
    current_page:int
    data:list[TitreResponse]
    model_config = ConfigDict(from_attributes=True)
->>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
+

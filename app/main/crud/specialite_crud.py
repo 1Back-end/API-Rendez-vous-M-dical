@@ -99,7 +99,7 @@ class CRUDSpecialite(CRUDBase[models.Specialites, schemas.Specialites.Create, sc
         db.commit()
         db.refresh(db_obj)
         return db_obj
-<<<<<<< HEAD
+
     
 
     @classmethod
@@ -113,8 +113,6 @@ class CRUDSpecialite(CRUDBase[models.Specialites, schemas.Specialites.Create, sc
         db.refresh(db_obj)
         return db_obj
     
-=======
->>>>>>> 79ec58cd0c1a2119c875d4d68ce9c032b285010a
 
     @classmethod
     def get_many(
@@ -124,7 +122,7 @@ class CRUDSpecialite(CRUDBase[models.Specialites, schemas.Specialites.Create, sc
         per_page: int = 25,
         order: Optional[str] = None,
         order_field: Optional[str] = None,
-<<<<<<< HEAD
+
         keyword: Optional[str]=None,
     ):
         

@@ -9,6 +9,7 @@ from .sexe_controller import router as sexe
 from .titres_controller import router as titre
 from .hopital_controller import router as hospital
 from .service_hopital_controller import router as service_hopitals
+from .patient_controller import router as patient
 
 api_router = APIRouter()
 
@@ -22,3 +23,4 @@ api_router.include_router(sexe)
 api_router.include_router(titre)
 api_router.include_router(hospital)
 api_router.include_router(service_hopitals)
+api_router.include_router(patient)
