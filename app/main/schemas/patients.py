@@ -80,7 +80,7 @@ class PatientSlim(BaseModel):
     phone_number_2:Optional[str]
     email:Optional[str]
     address:AddressSlim
-    sexe:SexeSlim
+    sexe:SexeSlim  
     religion:ReligionSlim
     is_patient_confidentiel:bool
     model_config = ConfigDict(from_attributes=True)
